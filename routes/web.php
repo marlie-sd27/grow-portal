@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentRegistrationFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// login routes
+Route::get('signin', [LoginController::class, 'signin'])->name('login');
+Route::get('callback', [LoginController::class, 'callback']);
+Route::get('signout', [LoginController::class, 'signout'])->name('signout');
+
+
+// Student Registration Form routes
+Route::resource('registration', StudentRegistrationFormController::class);
+
+
+
+// must be logged in to access routes
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', function() {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+
