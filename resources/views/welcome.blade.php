@@ -1,1 +1,5 @@
-<a href="/signin" class="btn btn-primary btn-large">Click here to sign in</a>
+@extends('layout2')
+
+@section('content')
+
+@endsection
